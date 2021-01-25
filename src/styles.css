@@ -1,0 +1,12 @@
+html {
+  margin: 0;
+  height: 100%;
+  background-color: #ffeedd;
+  position: relative;
+  overflow: auto;
+}
+body {
+  margin: 48px auto !important; /* Centers the body */
+  width: 600px;
+  max-width: 95vw;
+}

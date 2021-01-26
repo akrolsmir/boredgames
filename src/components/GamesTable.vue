@@ -7,9 +7,24 @@
   Url:
   <input class="input" v-model="newUrl" />
   <button class="button" @click="newGame">Create new game!</button>
+  <div class="columns">
+    <div class="column">
+      <GameCard />
+      <GameCard />
+    </div>
+    <div class="column">
+      <GameCard />
+      <GameCard />
+    </div>
+    <div class="column">
+      <GameCard />
+      <GameCard />
+    </div>
+  </div>
 </template>
 
 <script>
+import GameCard from './GameCard.vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -49,6 +64,9 @@ function sanitize(text) {
 }
 
 export default {
+  components: {
+    GameCard,
+  },
   data() {
     return {
       newTitle: '',

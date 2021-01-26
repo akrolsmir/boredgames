@@ -9,30 +9,56 @@
   <button class="button" @click="newGame">Create new game!</button>
   <div class="columns">
     <div class="column">
-      <GameCard />
-      <GameCard />
+      <GameCard></GameCard>
+      <GameCard :game="INCRYPT_GAME"></GameCard>
     </div>
     <div class="column">
-      <GameCard />
-      <GameCard />
+      <GameCard></GameCard>
+      <GameCard></GameCard>
     </div>
     <div class="column">
-      <GameCard />
-      <GameCard />
+      <GameCard></GameCard>
+      <GameCard></GameCard>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column">
+      <EditGame v-model="editGame"></EditGame>
+    </div>
+    <div class="column">
+      <GameCard :game="editGame"></GameCard>
     </div>
   </div>
 </template>
 
 <script>
-import GameCard from './GameCard.vue'
+import GameCard, { makeDefaultGame } from './GameCard.vue'
+import EditGame from './EditGame.vue'
 import { loadTable, addGame } from '../firebase-network.js'
+
+const INCRYPT_GAME = {
+  title: 'Incrypt',
+  url: 'https://oneword.games/incrypt',
+  image: 'https://oneword.games/images/oneword-logo.png',
+  description: 'Zany description here!',
+  attr: {
+    minPlayers: 4,
+    maxPlayers: 10,
+    playtime: 45,
+  },
+  hearts: 2,
+  reviews: ['R1', 'R2', 'R3'],
+}
 
 export default {
   components: {
     GameCard,
+    EditGame,
   },
   data() {
     return {
+      editGame: makeDefaultGame(),
+      INCRYPT_GAME,
       newTitle: '',
       newUrl: '',
       table: [

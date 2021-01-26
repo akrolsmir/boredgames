@@ -24,8 +24,7 @@
       </div>
 
       <div class="content">
-        Each player comes up with a one word clue for the guesser. But watch out
-        for duplicates! <br />
+        {{ game.description }} <br />
         <p class="mb-2 mt-2">
           <b
             >{{ game.attr.minPlayers }}-{{ game.attr.maxPlayers }} players.
@@ -44,20 +43,24 @@
 </template>
 
 <script>
-const game = {
-  title: 'One Word',
-  url: 'https://oneword.games',
-  image: 'https://oneword.games/images/oneword-logo.png',
-  attr: {
-    minPlayers: 1,
-    maxPlayers: 4,
-    playtime: 30,
-  },
-  hearts: 3,
-  reviews: [
-    'Worth every penny. -Austin',
-    'This literally changed my life! Would recommend to friends, family, enemies, basically anyone... -Sinclair',
-  ],
+export function makeDefaultGame() {
+  return {
+    title: 'One Word',
+    url: 'https://oneword.games',
+    image: 'https://oneword.games/images/oneword-logo.png',
+    description:
+      'Each player comes up with a one word clue for the guesser. But watch out for duplicates!',
+    attr: {
+      minPlayers: 1,
+      maxPlayers: 4,
+      playtime: 30,
+    },
+    hearts: 3,
+    reviews: [
+      'Worth every penny. -Austin',
+      'This literally changed my life! Would recommend to friends, family, enemies, basically anyone... -Sinclair',
+    ],
+  }
 }
 
 export default {
@@ -67,7 +70,7 @@ export default {
   props: {
     game: {
       type: Object,
-      default: game,
+      default: makeDefaultGame(),
     },
   },
 }

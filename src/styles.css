@@ -1,7 +1,7 @@
 html {
   margin: 0;
   height: 100%;
-  background-color: #ffeedd;
+  background-color: #ffeedd !important;
   position: relative;
   overflow: auto;
 }

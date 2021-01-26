@@ -9,24 +9,24 @@
   <button class="button" @click="newGame">Create new game!</button>
   <div class="columns">
     <div class="column">
-      <GameCard></GameCard>
-      <GameCard :game="INCRYPT_GAME"></GameCard>
+      <GameCard />
+      <GameCard :game="INCRYPT_GAME" />
     </div>
     <div class="column">
-      <GameCard></GameCard>
-      <GameCard></GameCard>
+      <GameCard />
+      <GameCard />
     </div>
     <div class="column">
-      <GameCard></GameCard>
-      <GameCard></GameCard>
+      <GameCard />
+      <GameCard />
     </div>
   </div>
   <div class="columns">
     <div class="column">
-      <EditGame v-model="editGame"></EditGame>
+      <EditGame v-model="editGame" />
     </div>
     <div class="column">
-      <GameCard :game="editGame"></GameCard>
+      <GameCard :game="editGame" />
     </div>
   </div>
 </template>

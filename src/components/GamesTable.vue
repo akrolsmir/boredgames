@@ -15,11 +15,13 @@
       <GameCard :game="toEdit" />
     </div>
   </div>
+  <GamesList :games="games" />
 </template>
 
 <script>
 import GameCard, { makeDefaultGame } from './GameCard.vue'
 import EditGame from './EditGame.vue'
+import GamesList from './GamesList.vue'
 import { loadTable } from '../firebase-network.js'
 
 const INCRYPT_GAME = {
@@ -40,6 +42,7 @@ export default {
   components: {
     GameCard,
     EditGame,
+    GamesList,
   },
   data() {
     return {

@@ -14,7 +14,9 @@
         </div>
         <div class="media-content">
           <p class="title is-4">
-            <a :href="game.url">{{ game.title }}</a>
+            <a :href="game.url">
+              <span v-if="rank">{{ rank }}. </span>{{ game.title }}
+            </a>
           </p>
           <p class="subtitle is-6">
             <span class="icony">{{ game.hearts }} ❤️</span>
@@ -74,6 +76,9 @@ export default {
     game: {
       type: Object,
       default: makeDefaultGame(),
+    },
+    rank: {
+      type: Number,
     },
   },
 }

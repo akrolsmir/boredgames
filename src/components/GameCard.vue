@@ -37,6 +37,7 @@
         <div class="tag mr-2" v-for="tag in game.tags" :key="tag">
           {{ tag }}
         </div>
+        <a @click="$emit('edit')">[Edit]</a>
       </div>
     </div>
   </div>
@@ -65,6 +66,7 @@ export function makeDefaultGame() {
 }
 
 export default {
+  emits: ['edit'],
   data() {
     return {}
   },

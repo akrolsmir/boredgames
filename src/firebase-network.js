@@ -42,6 +42,11 @@ export async function setGame(game) {
   await db.collection(COLLECTION).doc(id).set(game)
 }
 
+export async function deleteGame(game) {
+  const id = sanitize(game.title)
+  await db.collection(COLLECTION).doc(id).delete()
+}
+
 // TODO: Extract to utils
 function sanitize(text) {
   return text

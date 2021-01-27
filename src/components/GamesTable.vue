@@ -2,17 +2,17 @@
   <h1 class="title">The Big List of Online Board Games</h1>
   <div class="columns">
     <div class="column" v-for="col in table">
-      <GameCard v-for="game in col" :game="game" />
+      <GameCard v-for="game in col" :game="game" @edit="toEdit = game" />
     </div>
   </div>
   <div class="columns">
     <div class="column">
       <h2 class="title is-4">Submit a game!</h2>
-      <EditGame v-model="editGame" />
+      <EditGame v-model="toEdit" @submit="reload" />
     </div>
     <div class="column">
       <h2 class="title is-4">Preview</h2>
-      <GameCard :game="editGame" />
+      <GameCard :game="toEdit" />
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      editGame: makeDefaultGame(),
+      toEdit: makeDefaultGame(),
       INCRYPT_GAME,
       newTitle: '',
       newUrl: '',
@@ -51,10 +51,13 @@ export default {
     }
   },
   async created() {
-    this.games = await this.loadTable()
+    await this.reload()
   },
   methods: {
     loadTable,
+    async reload() {
+      this.games = await this.loadTable()
+    },
   },
   computed: {
     table() {

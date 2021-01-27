@@ -63,20 +63,23 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button @click="submit" class="button is-link">Submit</button>
+        <button @click="submitClick" class="button is-link">Submit</button>
+      </div>
+      <div class="control">
+        <button @click="deleteClick" class="button is-danger">Delete</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { setGame } from '../firebase-network.js'
+import { setGame, deleteGame } from '../firebase-network.js'
 
 // Boilerplate to get v-model working in components
 // See https://v3.vuejs.org/guide/component-basics.html#using-v-model-on-components
 export default {
   props: ['modelValue'],
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'submit'],
   computed: {
     value: {
       get() {
@@ -88,9 +91,14 @@ export default {
     },
   },
   methods: {
-    async submit() {
+    async submitClick() {
       await setGame(this.value)
       // TODOs: Add feedback after submit; edit existing games; refetch after editing.
+      this.$emit('submit')
+    },
+    async deleteClick() {
+      await deleteGame(this.value)
+      this.$emit('submit')
     },
   },
 }

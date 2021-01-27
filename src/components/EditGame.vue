@@ -36,6 +36,32 @@
       </div>
     </div>
 
+    <div class="field">
+      <label class="label">Description</label>
+      <div class="control">
+        <textarea
+          class="textarea"
+          type="text"
+          v-model="value.description"
+          placeholder="Summarize the game in 1-2 sentences."
+        ></textarea>
+      </div>
+    </div>
+
+    <template v-for="(attrValue, attr) in value.attr" :key="attr">
+      <div class="field">
+        <label class="label">{{ attr }}</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            v-model="value.attr[attr]"
+            placeholder="https://..."
+          />
+        </div>
+      </div>
+    </template>
+
     <div class="field is-grouped">
       <div class="control">
         <button class="button is-link">Submit</button>

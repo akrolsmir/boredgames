@@ -2,7 +2,7 @@
   <div class="card mb-5">
     <div class="card-image">
       <figure class="image">
-        <!-- <img :src="image" alt="Giant hero image" /> -->
+        <!-- <img :src="game.image" alt="Giant hero image" /> -->
       </figure>
     </div>
     <div class="card-content">
@@ -60,6 +60,7 @@ export function makeDefaultGame() {
       'Worth every penny. -Austin',
       'This literally changed my life! Would recommend to friends, family, enemies, basically anyone... -Sinclair',
     ],
+    tags: ['Party', 'Coop', 'Word'],
   }
 }
 

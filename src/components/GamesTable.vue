@@ -1,12 +1,5 @@
 <template>
-  <div v-for="game in table" :key="game.url">
-    <a :href="game.url">{{ game.title }}</a>
-  </div>
-  Title:
-  <input class="input" v-model="newTitle" />
-  Url:
-  <input class="input" v-model="newUrl" />
-  <button class="button" @click="newGame">Create new game!</button>
+  <h1 class="title">The Big List of Online Board Games</h1>
   <div class="columns">
     <div class="column">
       <GameCard />
@@ -23,9 +16,11 @@
   </div>
   <div class="columns">
     <div class="column">
+      <h2 class="title is-4">Submit a game!</h2>
       <EditGame v-model="editGame" />
     </div>
     <div class="column">
+      <h2 class="title is-4">Preview</h2>
       <GameCard :game="editGame" />
     </div>
   </div>

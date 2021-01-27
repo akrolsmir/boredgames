@@ -37,12 +37,9 @@ export async function loadTable() {
   return games
 }
 
-export async function addGame(title, url) {
-  const id = sanitize(title)
-  await db.collection(COLLECTION).doc(id).set({
-    title,
-    url,
-  })
+export async function setGame(game) {
+  const id = sanitize(game.title)
+  await db.collection(COLLECTION).doc(id).set(game)
 }
 
 // TODO: Extract to utils

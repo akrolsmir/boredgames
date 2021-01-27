@@ -41,7 +41,6 @@
       <div class="control">
         <textarea
           class="textarea"
-          type="text"
           v-model="value.description"
           placeholder="Summarize the game in 1-2 sentences."
         ></textarea>
@@ -64,13 +63,15 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link">Submit</button>
+        <button @click="submit" class="button is-link">Submit</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { setGame } from '../firebase-network.js'
+
 // Boilerplate to get v-model working in components
 // See https://v3.vuejs.org/guide/component-basics.html#using-v-model-on-components
 export default {
@@ -84,6 +85,12 @@ export default {
       set(value) {
         this.$emit('update:modelValue', value)
       },
+    },
+  },
+  methods: {
+    async submit() {
+      await setGame(this.value)
+      // TODOs: Add feedback after submit; edit existing games; refetch after editing.
     },
   },
 }

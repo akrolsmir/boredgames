@@ -93,7 +93,7 @@ export default {
   methods: {
     async submitClick() {
       await setGame(this.value)
-      // TODOs: Add feedback after submit; edit existing games; refetch after editing.
+      // TODOs: Add feedback after submit?
       this.$emit('submit')
     },
     async deleteClick() {

@@ -61,6 +61,18 @@
       </div>
     </template>
 
+    <div class="field">
+      <label class="label">Tags</label>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          v-model="tagsString"
+          placeholder="https://..."
+        />
+      </div>
+    </div>
+
     <div class="field is-grouped">
       <div class="control">
         <button @click="submitClick" class="button is-link">Submit</button>
@@ -87,6 +99,14 @@ export default {
       },
       set(value) {
         this.$emit('update:modelValue', value)
+      },
+    },
+    tagsString: {
+      get() {
+        return this.value.tags.join(', ')
+      },
+      set(value) {
+        this.value.tags = value.split(', ')
       },
     },
   },

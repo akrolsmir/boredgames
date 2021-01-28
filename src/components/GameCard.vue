@@ -36,7 +36,11 @@
         <!-- <a>@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a> -->
         <!-- <br /> -->
         <!-- <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> -->
-        <div class="tag mr-2" v-for="tag in game.tags" :key="tag">
+        <div
+          class="tag mr-2"
+          v-for="tag in game.tags.filter(Boolean)"
+          :key="tag"
+        >
           {{ tag }}
         </div>
         <a @click="$emit('edit')">[Edit]</a>

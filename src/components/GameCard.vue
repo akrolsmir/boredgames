@@ -7,11 +7,12 @@
     </div>
     <div class="card-content">
       <div class="media">
-        <div class="media-left">
+        <!-- Too lazy to actually find images for now -->
+        <!-- <div class="media-left">
           <figure class="image container is-48x48">
             <img :src="game.image" alt="Thumbnail image" />
           </figure>
-        </div>
+        </div> -->
         <div class="media-content">
           <p class="title is-4">
             <a :href="game.url">
@@ -26,6 +27,7 @@
       </div>
 
       <div class="content">
+        <!-- TODO: Compact mode without description? -->
         {{ game.description }} <br />
         <p class="mb-2 mt-2">
           <b
@@ -39,6 +41,7 @@
         <div
           class="tag mr-2"
           v-for="tag in game.tags.filter(Boolean)"
+          :style="tagStyle(tag)"
           :key="tag"
         >
           {{ tag }}
@@ -50,6 +53,8 @@
 </template>
 
 <script>
+import ColorHash from '../vendor/color-hash-esm.js'
+
 export function makeDefaultGame() {
   return {
     title: 'One Word',
@@ -67,7 +72,7 @@ export function makeDefaultGame() {
       'Worth every penny. -Austin',
       'This literally changed my life! Would recommend to friends, family, enemies, basically anyone... -Sinclair',
     ],
-    tags: ['Party', 'Coop', 'Word'],
+    tags: ['party', 'coop', 'word'],
   }
 }
 
@@ -85,14 +90,20 @@ export default {
       type: Number,
     },
   },
+  methods: {
+    tagStyle(tag) {
+      return {
+        'background-color': new ColorHash({
+          lightness: 0.9,
+          saturation: 1,
+        }).hex(tag),
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
-.tag {
-  background-color: #ffddee;
-}
-
 .icony {
   margin-right: 1rem;
 }

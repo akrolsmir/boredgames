@@ -1,10 +1,11 @@
-import vue from '@vitejs/plugin-vue';
-import { optimizeDeps } from 'vite';
+import vue from '@vitejs/plugin-vue'
 
 /**
  * @type {import('vite').UserConfig}
  */
 export default {
   plugins: [vue()],
-  optimizeDeps: { include: ['firebase/app', 'firebase/firestore'] },
-};
+  optimizeDeps: {
+    include: ['firebase/app', 'firebase/firestore', 'firebase/auth'],
+  },
+}

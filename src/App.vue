@@ -1,9 +1,12 @@
 <template>
+  <Navbar />
   <GamesTable />
 </template>
 
 <script setup>
 import GamesTable from './components/GamesTable.vue'
+import Navbar from './components/Navbar.vue'
+import LoginModal from './components/LoginModal.vue'
 </script>
 
 <style>

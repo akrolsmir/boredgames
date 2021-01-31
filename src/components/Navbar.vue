@@ -91,7 +91,7 @@ export default {
     },
   },
   created() {
-    listenForLogin(this)
+    listenForLogin((user) => (this.user = user))
   },
 }
 </script>

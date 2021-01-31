@@ -31,11 +31,11 @@ const CACHED_USER_KEY = 'CACHED_USER_KEY'
  *   // TODO: Figure out data model
  * }
  */
-export function listenForLogin(vueApp) {
+export function listenForLogin(setUser /** callback that takes in user */) {
   // Immediately load any persisted user object from browser cache.
   const cachedUser = localStorage.getItem(CACHED_USER_KEY)
   if (cachedUser) {
-    vueApp.user = JSON.parse(cachedUser)
+    setUser(JSON.parse(cachedUser))
   }
 
   // Then listen for any login changes (includes first login)
@@ -54,7 +54,7 @@ export function listenForLogin(vueApp) {
         await db.collection('users').doc(fetchedUser.id).set(fetchedUser)
         // TODO: Send welome email here
       }
-      vueApp.user = fetchedUser
+      setUser(fetchedUser)
 
       // Persist to local storage, to reduce login blink next time.
       // Note: Cap on localStorage size is ~5mb

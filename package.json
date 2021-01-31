@@ -11,6 +11,7 @@
     "bulma": "^0.9.1",
     "firebase": "^8.2.4",
     "firebaseui": "^4.7.1",
+    "nanoid": "^3.1.20",
     "vue": "^3.0.5",
     "vuedraggable": "^4.0.1"
   },

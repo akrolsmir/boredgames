@@ -20,13 +20,24 @@
             </a>
           </p>
           <p class="subtitle is-6">
-            <span class="icony">{{ game.hearts }} ❤️</span>
-            <span>{{ game.reviews.length }} 🧾.</span>
+            <span class="icony">{{ game.hearts }} hearts</span>
+            <span>{{ game.reviews.length }} reviews</span>
           </p>
+          <div class="field has-addons">
+            <p class="control" v-for="(icon, s) in icons" :key="s">
+              <button
+                class="button"
+                :class="{ 'is-link': score == s }"
+                @click="startRating(s)"
+              >
+                {{ icon }}
+              </button>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="content">
+      <div v-if="mode == 'CARD'" class="content">
         <!-- TODO: Compact mode without description? -->
         {{ game.description }} <br />
         <p class="mb-2 mt-2">
@@ -48,12 +59,26 @@
         </div>
         <a @click="$emit('edit')">[Edit]</a>
       </div>
+
+      <div v-else-if="mode == 'RATING'" class="content">
+        <textarea
+          class="textarea"
+          :placeholder="`What'd you think about ${game.title}?`"
+          v-model="review.text"
+        >
+        </textarea
+        ><br />
+        <button class="button" @click="submitRating">Submit your review</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { customAlphabet } from 'nanoid'
 import ColorHash from '../vendor/color-hash-esm.js'
+import { setReview } from '../firebase-network.js'
+import { inject } from 'vue'
 
 export function makeDefaultGame() {
   return {
@@ -76,10 +101,30 @@ export function makeDefaultGame() {
   }
 }
 
+function generateId() {
+  const base62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZbcdefghijklmnopqrstuvwxyz'
+  const nanoid = customAlphabet(base62, 8)
+  return nanoid()
+}
+
 export default {
   emits: ['edit'],
+  setup() {
+    return { user: inject('currentUser') }
+  },
   data() {
-    return {}
+    return {
+      mode: 'CARD', // also 'RATING'; maybe 'COMPACT' and 'EDITING'?
+      score: 0,
+      review: {},
+      icons: {
+        5: '❤️',
+        4: '👍',
+        3: '😐',
+        2: '👎',
+        1: '😡',
+      },
+    }
   },
   props: {
     game: {
@@ -91,6 +136,20 @@ export default {
     },
   },
   methods: {
+    async startRating(score) {
+      // TODO: Only submit if user is logged in
+      this.score = score
+      this.mode = 'RATING'
+      // Submit the rating as-is, without review text
+      this.review.id = generateId() // TODO: Reuse review.ID if already reviewed by this user
+      this.review.title = this.icons[score]
+      this.review.creator = this.user.id
+      setReview(this.game.title, this.review)
+    },
+    async submitRating() {
+      setReview(this.game.title, this.review)
+      this.mode = 'CARD'
+    },
     tagStyle(tag) {
       return {
         'background-color': new ColorHash({

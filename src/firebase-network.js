@@ -26,7 +26,7 @@ if (!firebase.apps.length) {
     })
   }
 }
-const db = firebase.firestore()
+export const db = firebase.firestore()
 const COLLECTION = 'games'
 
 export async function loadTable() {
@@ -45,6 +45,21 @@ export async function setGame(game) {
 export async function deleteGame(game) {
   const id = sanitize(game.title)
   await db.collection(COLLECTION).doc(id).delete()
+}
+
+export async function setReview(gameTitle, review) {
+  // TODO: generate gameId with nanoid;
+  // nanoid maybe should be in firebase, not components (for reviewId, too)
+  const gameId = sanitize(gameTitle)
+
+  // TODO: Should review contain gameId? Maybe that's what `link` contains...
+  await db
+    .collection(COLLECTION)
+    .doc(gameId)
+    // Store reviews in a subcollection of games
+    .collection('reviews')
+    .doc(review.id)
+    .set(review)
 }
 
 // TODO: Extract to utils

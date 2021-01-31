@@ -57,6 +57,7 @@
     </div>
   </div>
 
+  <h2 class="title">Rank your favorites!</h2>
   <GamesList :games="games" />
 </template>
 
@@ -92,7 +93,7 @@ export default {
       INCRYPT_GAME,
       newTitle: '',
       newUrl: '',
-      games: [],
+      games: [], // TODO: reduce layout shift by prefilling with data/placeholders
       filter: {
         tags: undefined,
         players: undefined,

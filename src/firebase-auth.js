@@ -28,7 +28,17 @@ const CACHED_USER_KEY = 'CACHED_USER_KEY'
  *   email: akrolsmir@gmail.com
  *   createTime: 12321478197
  *   lastUpdateTime: 12321478197
- *   // TODO: Figure out data model
+ *   lists: subcollection
+ * }
+ *
+ * list: {
+ *   id: listid1
+ *   title: Top 10 anime betrayals
+ *   items: {
+ *     gameid1: 2
+ *     gameid2: 3
+ *     articleid3: 1
+ *   }
  * }
  */
 export function listenForLogin(setUser /** callback that takes in user */) {

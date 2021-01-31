@@ -35,7 +35,7 @@ function injectFirebaseUi() {
         if (window.opener) {
           // The widget has been opened in a popup, so close the window
           // and return false to not redirect the opener.
-          toggleVisible()
+          // TODO: close window, toggleVisible()
           return false
         } else {
           // The widget has been used in redirect mode, so we redirect to the signInSuccessUrl.

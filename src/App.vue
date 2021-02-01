@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <GamesTable />
+  <router-view></router-view>
 </template>
 
 <script>

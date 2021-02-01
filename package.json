@@ -13,6 +13,7 @@
     "firebaseui": "^4.7.1",
     "nanoid": "^3.1.20",
     "vue": "^3.0.5",
+    "vue-router": "4",
     "vuedraggable": "^4.0.1"
   },
   "devDependencies": {

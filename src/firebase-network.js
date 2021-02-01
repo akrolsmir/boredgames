@@ -37,6 +37,11 @@ export async function loadTable() {
   return games
 }
 
+export async function getGame(id) {
+  const doc = await db.collection(COLLECTION).doc(id).get()
+  return doc.data()
+}
+
 export async function setGame(game) {
   const id = sanitize(game.title)
   await db.collection(COLLECTION).doc(id).set(game)
@@ -49,7 +54,7 @@ export async function deleteGame(game) {
 
 export async function setReview(gameTitle, review) {
   // TODO: generate gameId with nanoid;
-  // nanoid maybe should be in firebase, not components (for reviewId, too)
+  // nanoid maybe should be called from firebase, not components (for gameId, too)
   const gameId = sanitize(gameTitle)
 
   // TODO: Should review contain gameId? Maybe that's what `link` contains...
@@ -63,7 +68,7 @@ export async function setReview(gameTitle, review) {
 }
 
 // TODO: Extract to utils
-function sanitize(text) {
+export function sanitize(text) {
   return text
     .trim()
     .toLowerCase()

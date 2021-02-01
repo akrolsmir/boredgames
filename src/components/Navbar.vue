@@ -7,13 +7,13 @@
     aria-label="main navigation"
   >
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
+      <router-link class="navbar-item" to="/">
         <img
           src="https://oneword.games/images/oneword-logo.png"
           width="80"
           style="max-height: none"
         />
-      </a>
+      </router-link>
 
       <a
         role="button"
@@ -30,7 +30,7 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item"> Home </a>
+        <router-link to="/" class="navbar-item"> Home </router-link>
 
         <a class="navbar-item"> Create a list </a>
 

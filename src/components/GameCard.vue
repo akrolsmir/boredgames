@@ -21,7 +21,9 @@
           </p>
           <p class="subtitle is-6">
             <span class="icony">{{ game.hearts }} hearts</span>
-            <span>{{ game.reviews.length }} reviews</span>
+            <router-link :to="`/games/${sanitize(game.title)}`"
+              >{{ game.reviews.length }} reviews</router-link
+            >
           </p>
           <div class="field has-addons">
             <p class="control" v-for="(icon, s) in icons" :key="s">
@@ -77,7 +79,7 @@
 <script>
 import { customAlphabet } from 'nanoid'
 import ColorHash from '../vendor/color-hash-esm.js'
-import { setReview } from '../firebase-network.js'
+import { setReview, sanitize } from '../firebase-network.js'
 import { inject } from 'vue'
 
 export function makeDefaultGame() {
@@ -136,6 +138,7 @@ export default {
     },
   },
   methods: {
+    sanitize,
     async startRating(score) {
       // TODO: Only submit if user is logged in
       this.score = score

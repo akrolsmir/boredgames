@@ -29,16 +29,29 @@ if (!firebase.apps.length) {
 export const db = firebase.firestore()
 const COLLECTION = 'games'
 
-export async function loadTable() {
+export async function loadTable(mcache = undefined) {
   const docs = await db.collection(COLLECTION).get()
 
   const games = []
-  docs.forEach((doc) => games.push(doc.data()))
+  docs.forEach((doc) => {
+    games.push(doc.data())
+    if (mcache) {
+      mcache.set(doc.id, doc.data())
+    }
+  })
   return games
 }
 
-export async function getGame(id) {
+export async function getGame(id, mcache = undefined) {
+  if (mcache && mcache.get(id)) {
+    return mcache.get(id)
+    // TODO: Should update cache in the background
+    // Cache updates should then also update the visible Vue component
+  }
   const doc = await db.collection(COLLECTION).doc(id).get()
+  if (mcache) {
+    mcache.set(id, doc.data())
+  }
   return doc.data()
 }
 

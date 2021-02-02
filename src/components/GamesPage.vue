@@ -1,6 +1,8 @@
 <template>
   <GameCard :game="game" />
-  TODO: Reviews should go here!
+  <div v-for="review in game.reviews">
+    {{ review }}
+  </div>
 </template>
 
 <script>
@@ -18,7 +20,7 @@ export default {
     }
   },
   async mounted() {
-    this.game = await getGame(this.id)
+    this.game = await getGame(this.id, this.mcache)
   },
 }
 </script>

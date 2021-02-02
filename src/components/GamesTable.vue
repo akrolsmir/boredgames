@@ -107,7 +107,7 @@ export default {
   methods: {
     loadTable,
     async reload() {
-      this.games = await this.loadTable()
+      this.games = await this.loadTable(this.mcache)
     },
     filterFunction(game) {
       if (this.filter.players) {

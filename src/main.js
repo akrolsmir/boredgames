@@ -15,8 +15,25 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(), // TODO: remove hash for pretty URLs
   routes,
 })
 
-createApp(App).use(router).mount('#app')
+export const app = createApp(App)
+app.use(router).mount('#app')
+
+class Mcache {
+  constructor() {
+    this.map = {}
+  }
+
+  get(key) {
+    return this.map[key]
+  }
+
+  set(key, value) {
+    this.map[key] = value
+  }
+}
+
+app.config.globalProperties.mcache = new Mcache()

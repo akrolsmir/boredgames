@@ -9,8 +9,8 @@
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">
         <img
-          src="https://oneword.games/images/oneword-logo.png"
-          width="80"
+          src="../assets/logo-white.svg"
+          width="200"
           style="max-height: none"
         />
       </router-link>

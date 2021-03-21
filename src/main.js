@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import GamesPage from './components/GamesPage.vue'
 import GamesTable from './components/GamesTable.vue'
+import BlockPage from './components/BlockPage.vue'
 
 // When compiled, import order isn't respected...?
 import 'bulma/css/bulma.css'
@@ -12,6 +13,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   { path: '/', component: GamesTable },
   { path: '/games/:id', component: GamesPage, props: true },
+  { path: '/blocks/:id', component: BlockPage, props: true },
 ]
 
 const router = createRouter({

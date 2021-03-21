@@ -139,6 +139,16 @@ export default {
   },
   methods: {
     sanitize,
+    toRouter(game) {
+      // See https://forum.vuejs.org/t/passing-props-through-router-link-solved/16868/5
+      return {
+        name: 'games',
+        // name: `/games/${sanitize(game.title)}`,
+        params: {
+          cached: game,
+        },
+      }
+    },
     async startRating(score) {
       // TODO: Only submit if user is logged in
       this.score = score
